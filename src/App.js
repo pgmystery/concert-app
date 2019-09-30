@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro'
 import ConcertList from './ConcertList';
+import FilterBar from './FilterBar'
 import mumford from './images/mumford.jpg'
 import bishop from './images/bishop.webp'
 import okkid from './images/okkid.jpg'
@@ -46,6 +47,7 @@ export default function App() {
 
   return (
     <AppStyled>
+      <FilterBar></FilterBar>
       <ConcertList concerts={concerts}/>
     </AppStyled>
   );
