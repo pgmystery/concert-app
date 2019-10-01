@@ -61,7 +61,14 @@ setFilteredConcerts(concerts.filter(concert => {
 
   return (
     <AppStyled>
-      <FilterBar onFilterChange={handleFilterChange} concerts={concerts}></FilterBar>
+      <FilterBar onFilterChange={handleFilterChange} tags={
+        Array.from(concerts.reduce((pre, acc) => {
+          acc.styles.forEach(tag => {
+            pre.add(tag)
+          })
+          return pre
+        }, new Set()))
+      }></FilterBar>
       <ConcertList filteredConcerts={filteredConcerts}/>
     </AppStyled>
   );

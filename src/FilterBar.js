@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 
-export default function FilterBar({ onFilterChange, concerts}) {
+export default function FilterBar({ onFilterChange, tags }) {
 
-const [filtersAreVisible, setFiltersAreVisible] = useState(false)
-  const [selectedFilter, setSelectedFilter] = useState(concerts)
+  const [filtersAreVisible, setFiltersAreVisible] = useState(false)
+  const [selectedFilter, setSelectedFilter] = useState(tags)
 
   useEffect(() => {
     onFilterChange(selectedFilter)
@@ -19,12 +19,13 @@ const [filtersAreVisible, setFiltersAreVisible] = useState(false)
       </FilterBarStyled>
       {filtersAreVisible &&
         <FilterStyled>
-          <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange} checked></input></StyledLabel>
+          {/* <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange} checked></input></StyledLabel>
           <StyledLabel>Pop<input name="Genre" value="Pop" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
           <StyledLabel>Indie<input name="Genre" value="Indie" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
           <StyledLabel>Metall<input name="Genre" value="Metall" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
           <StyledLabel>Folk<input name="Genre" value="Folk" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-          <StyledLabel>Rap<input name="Genre" value="Rap" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Rap<input name="Genre" value="Rap" type="checkbox" onChange={handleInputChange}></input></StyledLabel> */}
+         { tags.map((tag, index) => <StyledLabel key={index}>{tag}<input name="Genre" value={tag} type="checkbox" onChange={handleInputChange} defaultChecked></input></StyledLabel>) }
         </FilterStyled>
       }
     </>

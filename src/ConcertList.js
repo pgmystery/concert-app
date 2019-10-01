@@ -3,11 +3,10 @@ import Concert from './Concert'
 import styled from 'styled-components/macro'
 
 export default function ConcertList({ filteredConcerts }) {
-  console.log('FILTERED_CONCERTS', filteredConcerts)
   return (
     <ConcertListStyled>
-      {filteredConcerts.map(concert => (
-        <Concert {...concert}/>
+      {filteredConcerts.map((concert, index) => (
+        <Concert {...concert} key={index}/>
         ))}
     </ConcertListStyled>
   )
