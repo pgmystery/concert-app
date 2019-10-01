@@ -5,18 +5,35 @@ import styled from 'styled-components/macro'
 export default function FilterBar ({onFilterChange}) {
 
 const [filtersAreVisible, setFiltersAreVisible] = useState(false)
+const [selectedFilter, setSelectedFilter] = useState([])
 
-function handleFilterClick() {
+  useEffect(() => {
+    onFilterChange(selectedFilter)
+  }, [selectedFilter])
+
+ return (
+    <>
+      <FilterBarStyled>
+        <h3 onClick={toggleFiltersVisiblity}>Add filter ... </h3>
+        <h3>Sort by ... </h3>
+      </FilterBarStyled>
+      {filtersAreVisible &&
+        <FilterStyled>
+          <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Pop<input name="Genre" value="Pop" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Indie<input name="Genre" value="Indie" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Metall<input name="Genre" value="Metall" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Folk<input name="Genre" value="Folk" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Rap<input name="Genre" value="Rap" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+        </FilterStyled>
+      }
+    </>
+  )
+
+
+function toggleFiltersVisiblity() {
   setFiltersAreVisible(!filtersAreVisible)
 }
-
-const [selectedFilter, setSelectedFilter] = useState([]
-)
-
-useEffect(() => {
-
-  onFilterChange(selectedFilter)
-}, [selectedFilter])
 
 function handleInputChange(event) {
   event.target.checked
@@ -26,26 +43,6 @@ function handleInputChange(event) {
     ...selectedFilter.slice(selectedFilter.indexOf(event.target.value) + 1)
   ])
 }
-
-
-  return (
-    <>
-    <FilterBarStyled>
-      <h3 onClick={handleFilterClick}>Add filter ... </h3>
-      <h3>Sort by ... </h3>
-    </FilterBarStyled>
-    {filtersAreVisible && 
-   <FilterStyled>
-      <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-        <StyledLabel>Pop<input name="Genre" value="Pop" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-        <StyledLabel>Indie<input  name="Genre" value="Indie" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-        <StyledLabel>Metall<input  name="Genre" value="Metall" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-        <StyledLabel>Folk<input  name="Genre" value="Folk" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
-        <StyledLabel>Rap<input name="Genre" value="Rap" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
- </FilterStyled>
-}
-</>
-  )
 }
 
 const FilterBarStyled = styled.section`
