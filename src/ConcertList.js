@@ -2,10 +2,11 @@ import React from 'react'
 import Concert from './Concert'
 import styled from 'styled-components/macro'
 
-export default function ConcertList({ concerts }) {
+export default function ConcertList({ filteredConcerts }) {
+  console.log(filteredConcerts)
   return (
     <ConcertListStyled>
-      {concerts.map(concert => (
+      {filteredConcerts.map(concert => (
         <Concert {...concert}/>
         ))}
     </ConcertListStyled>

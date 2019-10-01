@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro'
 import ConcertList from './ConcertList';
 import FilterBar from './FilterBar'
@@ -10,14 +10,14 @@ import frittenbude from './images/frittenbude.png'
 
 export default function App() {
 
-  const concerts = [
+  const concerts= [
     {
       image: mumford ,
       artist: 'Mumford and sons',
       place: 'Mojo',
       date: '14.10.2019',
       date_data: '2019-10-14',
-      styles: ['rock', 'indie', 'folk']
+      styles: ['Rock', 'Indie', 'Folk']
     },
     {
   image: bishop,
@@ -25,7 +25,7 @@ export default function App() {
       place: 'Große Freiheit',
       date: '14.10.2020',
       date_data: '2020-10-14',
-      styles: ['rock', 'indie']
+      styles: ['Rock', 'Indie']
     },
     {
   image: okkid,
@@ -33,7 +33,7 @@ export default function App() {
       place: 'Große Freiheit',
       date: '03.11.2019',
       date_data: '2019-11-03',
-      styles: ['rap', 'indie', 'folk']
+      styles: ['Rap', 'Indie', 'Folk']
     },
     {
   image: frittenbude,
@@ -41,14 +41,28 @@ export default function App() {
       place: 'Mojo',
       date: '12.05.2019',
       date_data: '2019-05-12',
-      styles: ['rap', 'pop', 'rock']
+      styles: ['Rap', 'Pop', 'Rock']
     }
   ]
 
+  const [filteredConcerts, setFilteredConcerts] = useState(concerts)
+
+  function handleFilterChange(selectedFilter) {
+setFilteredConcerts(concerts.filter(concert => {
+      let isInFilter = false
+      selectedFilter.forEach(filter => {
+        concert.styles.includes(filter) && (isInFilter = true)
+      })
+      return isInFilter
+    })
+    )
+  }
+
+
   return (
     <AppStyled>
-      <FilterBar></FilterBar>
-      <ConcertList concerts={concerts}/>
+      <FilterBar onFilterChange={handleFilterChange}></FilterBar>
+      <ConcertList filteredConcerts={filteredConcerts}/>
     </AppStyled>
   );
 }
