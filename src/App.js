@@ -61,7 +61,7 @@ setFilteredConcerts(concerts.filter(concert => {
 
   return (
     <AppStyled>
-      <FilterBar onFilterChange={handleFilterChange}></FilterBar>
+      <FilterBar onFilterChange={handleFilterChange} concerts={concerts}></FilterBar>
       <ConcertList filteredConcerts={filteredConcerts}/>
     </AppStyled>
   );

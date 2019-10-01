@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 
-export default function FilterBar ({onFilterChange}) {
+export default function FilterBar({ onFilterChange, concerts}) {
 
 const [filtersAreVisible, setFiltersAreVisible] = useState(false)
-const [selectedFilter, setSelectedFilter] = useState([])
+  const [selectedFilter, setSelectedFilter] = useState(concerts)
 
   useEffect(() => {
     onFilterChange(selectedFilter)
@@ -19,7 +19,7 @@ const [selectedFilter, setSelectedFilter] = useState([])
       </FilterBarStyled>
       {filtersAreVisible &&
         <FilterStyled>
-          <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
+          <StyledLabel>Rock<input name="Genre" value="Rock" type="checkbox" onChange={handleInputChange} checked></input></StyledLabel>
           <StyledLabel>Pop<input name="Genre" value="Pop" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
           <StyledLabel>Indie<input name="Genre" value="Indie" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
           <StyledLabel>Metall<input name="Genre" value="Metall" type="checkbox" onChange={handleInputChange}></input></StyledLabel>
@@ -36,12 +36,13 @@ function toggleFiltersVisiblity() {
 }
 
 function handleInputChange(event) {
+
   event.target.checked
-  ? setSelectedFilter([...selectedFilter, event.target.value])
-  : setSelectedFilter([
-    ...selectedFilter.slice(0, selectedFilter.indexOf(event.target.value)),
-    ...selectedFilter.slice(selectedFilter.indexOf(event.target.value) + 1)
-  ])
+    ? setSelectedFilter([...selectedFilter, event.target.value])
+    : setSelectedFilter([
+      ...selectedFilter.slice(0, selectedFilter.indexOf(event.target.value)),
+      ...selectedFilter.slice(selectedFilter.indexOf(event.target.value) + 1)
+    ])
 }
 }
 
